@@ -1,17 +1,21 @@
-import { Hono } from "hono";
+import * as Sentry from "@sentry/cloudflare";
+import { type Env, Hono } from "hono";
 import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 
-const api = new Hono().get("/health", (c) => {
-	return c.json({ status: "ok" });
-});
+type Bindings = {
+	CF_VERSION_METADATA: string;
+	SENTRY_DSN: string;
+};
 
-const app = new Hono()
+const app = new Hono<{ Bindings: Bindings }>()
 	.get("/", (c) => {
 		return c.text("Hello, Hono!");
 	})
-	.use("/api/*", cors())
-	.route("/api", api);
+	.get("/health", (c) => {
+		return c.json({ status: "ok" });
+	})
+	.use("/api/*", cors());
 
 app.onError((error, c) => {
 	console.error(error);
@@ -34,4 +38,14 @@ app.onError((error, c) => {
 	);
 });
 
-export default app;
+export default Sentry.withSentry((env: Env) => {
+	const { id: versionId } = env.CF_VERSION_METADATA;
+
+	return {
+		dsn: env.SENTRY_DSN,
+		release: versionId,
+		// Adds request headers and IP for users, for more info visit:
+		// https://docs.sentry.io/platforms/javascript/guides/cloudflare/configuration/options/#sendDefaultPii
+		sendDefaultPii: true,
+	};
+}, app);
