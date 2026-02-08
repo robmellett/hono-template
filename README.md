@@ -1,10 +1,17 @@
-## Hono Template
+## Hono
+
+This is a template for running a hono project on Cloudflare workers.
+
+## Install
 
 ```shell
 cp .dev.vars.example .dev.vars
+
 pnpm install
 pnpm run dev
 ```
+
+## Deploy
 
 ```shell
 pnpm run deploy
@@ -35,3 +42,6 @@ Add your Sentry DSN variable to `.dev.vars`.
 ```shell
 pnpm test
 ```
+
+- https://www.npmjs.com/package/@cloudflare/vitest-pool-workers
+- https://developers.cloudflare.com/workers/testing/vitest-integration/write-your-first-test/
