@@ -1,6 +1,7 @@
 ## Hono Template
 
 ```shell
+cp .dev.vars.example .dev.vars
 pnpm install
 pnpm run dev
 ```
@@ -21,6 +22,13 @@ Pass the `CloudflareBindings` as generics when instantiation `Hono`:
 // src/index.ts
 const app = new Hono<{ Bindings: CloudflareBindings }>()
 ```
+
+## Sentry
+
+Add your Sentry DSN variable to `.dev.vars`.
+
+- https://docs.sentry.io/platforms/javascript/guides/cloudflare/frameworks/hono/
+
 
 ## Testing
 
