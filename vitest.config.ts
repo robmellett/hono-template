@@ -15,6 +15,7 @@ export default defineWorkersConfig(async () => {
 
 	return {
 		test: {
+			// Enable this line if you need to run D1 migrations before tests
 			// setupFiles: ["./tests/setup.ts"],
 			globals: true,
 			poolOptions: {
