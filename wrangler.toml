@@ -1,9 +1,6 @@
 # Wrangler TOML configuration for hono-template
 name = "hono-template"
-main = "src/index.ts"
 compatibility_date = "2026-02-08"
-
-# Uncomment and configure the following sections as needed:
 compatibility_flags = ["nodejs_compat"]
 main = "src/index.ts"
 minify = true
