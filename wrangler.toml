@@ -5,6 +5,8 @@ compatibility_date = "2026-02-08"
 
 # Uncomment and configure the following sections as needed:
 compatibility_flags = ["nodejs_compat"]
+main = "src/index.ts"
+minify = true
 
 # [vars]
 # MY_VAR = "my-variable"
