@@ -45,3 +45,8 @@ pnpm test
 
 - https://www.npmjs.com/package/@cloudflare/vitest-pool-workers
 - https://developers.cloudflare.com/workers/testing/vitest-integration/write-your-first-test/
+
+
+## Documentation
+
+- https://developers.cloudflare.com/workers/testing/vitest-integration/configuration/
