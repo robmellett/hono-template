@@ -3,15 +3,29 @@ name: Deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v6
+        name: Install pnpm
+        with:
+          version: 11
+          cache: true
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      # https://github.com/cloudflare/wrangler-action/issues/379
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          packageManager: pnpm
+          wranglerVersion: latest
